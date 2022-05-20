@@ -25,7 +25,7 @@ func (c Cache) Get(key string) (string, bool) {
 	if cache.unlimited {
 		return cache.value, true
 	} else {
-		if cache.deadline.Before(time.Now()) {
+		if cache.deadline.After(time.Now()) {
 			return cache.value, true
 		}
 	}
@@ -42,7 +42,7 @@ func (c Cache) Keys() []string {
 	for key, value := range c.m {
 		if value.unlimited {
 			keys = append(keys, key)
-		} else if value.deadline.Before(time.Now()) {
+		} else if value.deadline.After(time.Now()) {
 			keys = append(keys, key)
 		}
 	}

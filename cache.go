@@ -13,7 +13,7 @@ type Cache struct {
 }
 
 func NewCache() Cache {
-	return Cache{}
+	return Cache{make(map[string]valueDeadline)}
 }
 
 func (c Cache) Get(key string) (string, bool) {
